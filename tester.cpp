@@ -1,20 +1,44 @@
 #include <cstdio>
+#include <cstdlib>
 #include <iostream>
+#include <cmath>
+#include <vector>
+#include <cstring>
+#include <stack>
 #include <string>
-#include <sstream>
-#include <iomanip>
-#include <stdio.h>
-#include <stdlib.h>
+#include <map>
+#include <queue>
+#include <set>
+#include <list>
 #include <ctime>
+#include <algorithm>
+using namespace std;
 
 int main(){
-	int a,b;
-	scanf("%d %d",&a,&b);
- 	if(a==2){
-	    for(int x=0;x;x++){
-				b=a+b;
-		}
-	}else{
-	    printf("11/23");
-	}
+    FILE *in;
+    srand(time(0));
+    while(1){
+        in = fopen("in.txt", "w");
+        int n = rand()%10000;
+        fprintf(in,"%d\n", n);
+        for( int i = 0; i < n; i++ ){
+            if( rand() % 2 == 0)
+                fprintf(in, "u %d\n", rand());
+            else{
+                int a = 1, b = 0, k;
+                while( a > b ){
+                    a = rand();
+                    b = rand();
+                }
+                k = rand()%(5)+1;
+                fprintf(in, "n %d %d %d\n", a, b, k);
+            }
+        }
+        fclose(in);
+        system("Blingo.exe < in.txt > out1.txt");
+        system("Blingo-brute.exe < in.txt > out2.txt");
+        int a = system("fc out2.txt out1.txt");
+        if(  a == 1 )
+            system("pause");
+    }
 }
